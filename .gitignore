@@ -1,0 +1,40 @@
+# Dependencies
+node_modules/
+*/node_modules/
+.pnp
+.pnp.js
+
+# Production builds
+dist/
+dist-ssr/
+build/
+client/dist/
+
+# SQLite runtime database & locks (auto-created by server/seedData.js on startup)
+server/*.sqlite
+server/*.sqlite-shm
+server/*.sqlite-wal
+*.sqlite
+*.sqlite-journal
+*.sqlite3
+*.db
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Editor & OS files
+.vscode/
+!.vscode/extensions.json
+.idea/
+.DS_Store
+Thumbs.db
