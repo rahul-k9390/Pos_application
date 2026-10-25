@@ -1,3 +1,5 @@
+const path = require('path');
+const fs = require('fs');
 const express = require('express');
 const cors = require('cors');
 const db = require('./db');
@@ -933,6 +935,19 @@ app.get('/api/reports/monthly', (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
+
+// Serve frontend static files if client/dist exists (production mode)
+const clientDistPath = path.join(__dirname, '../client/dist');
+if (fs.existsSync(clientDistPath)) {
+  app.use(express.static(clientDistPath));
+  // SPA fallback for all GET requests not starting with /api
+  app.use((req, res, next) => {
+    if (req.method === 'GET' && !req.path.startsWith('/api')) {
+      return res.sendFile(path.join(clientDistPath, 'index.html'));
+    }
+    next();
+  });
+}
 
 // Start Express Server
 app.listen(PORT, () => {
